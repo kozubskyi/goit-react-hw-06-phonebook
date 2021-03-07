@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import './ContactForm.scss';
-import { v4 as uuidv4 } from 'uuid';
+// import { v4 as uuidv4 } from 'uuid';
 import * as actions from '../../redux/contacts/contacts-actions';
 
 const ContactForm = ({ items, onContactAdd }) => {
@@ -15,8 +15,9 @@ const ContactForm = ({ items, onContactAdd }) => {
     if (names.includes(name)) {
       alert(`${name} is already in contacts.`);
     } else {
-      const contact = { id: uuidv4(), name, number };
-      onContactAdd(contact);
+      // const contact = { id: uuidv4(), name, number };
+      // onContactAdd(contact);
+      onContactAdd(name, number); // захотел создавать контакт в actions для практики
     }
     formReset();
   };
@@ -65,7 +66,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  onContactAdd: contact => dispatch(actions.addContact(contact)),
+  // onContactAdd: contact => dispatch(actions.addContact(contact)),
+  onContactAdd: (name, number) => dispatch(actions.addContact(name, number)),
 });
 
 ContactForm.defaultProps = {
